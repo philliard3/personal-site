@@ -73,6 +73,7 @@ typings/
 
 # Nuxt generate
 dist
+philliard3.github.io
 
 # vuepress build output
 .vuepress/dist

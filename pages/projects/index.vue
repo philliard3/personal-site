@@ -83,7 +83,7 @@ export default {
             },
             {
               // make this the link to the GitHub for the project
-              to: "/",
+              to: "https://github.com/philliard3/personal-site",
               text: "See the source code"
             }
           ]
