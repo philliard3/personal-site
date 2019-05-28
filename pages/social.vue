@@ -49,9 +49,17 @@ export default {
         },
         { divider: true, inset: true },
         {
+          title: "LinkedIn",
+          to: "https://www.linkedin.com/in/phillip-hilliard-994235bb/",
+          logo:
+            "https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
+        },
+        { divider: true, inset: true },
+        {
           title: "Twitter",
           to: "https://twitter.com/philliardcode",
-          logo: "/Twitter_Social_Icon_Circle_Color.png"
+          logo:
+            "https://www.seas.upenn.edu/~pdh/Twitter_Social_Icon_Circle_Color.png"
         },
         { divider: true, inset: true },
         {

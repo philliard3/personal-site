@@ -30,9 +30,3 @@
     </v-flex>
   </v-layout>
 </template>
-
-<style>
-#main-info {
-  min-width: 500px;
-}
-</style>

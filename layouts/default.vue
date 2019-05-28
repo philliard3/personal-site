@@ -13,6 +13,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar :clipped-left="clipped" dark fixed app>
+      <v-icon @click="drawer = !drawer">menu</v-icon>
       <nuxt-link to="/" class="no-underline">
         <v-toolbar-title class="font-weight-black" v-text="title"/>
       </nuxt-link>

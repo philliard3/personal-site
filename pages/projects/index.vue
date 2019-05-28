@@ -78,7 +78,7 @@ export default {
           ],
           actions: [
             {
-              to: "/",
+              to: "https://www.seas.upenn.edu/~pdh/",
               text: "Project homepage"
             },
             {
