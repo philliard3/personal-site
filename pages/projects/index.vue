@@ -5,6 +5,13 @@
         <v-layout>
           <v-flex xs12 sm4 flat>
             <v-text-field prepend-icon="search" label="Search term" v-model="searchTerm" clearable></v-text-field>
+            <v-chip
+              v-for="(tag, t) in sampleTags"
+              :key="t"
+              color="primary"
+              text-color="white"
+              @click="searchTerm = tag.title"
+            >{{ tag.title }}</v-chip>
           </v-flex>
         </v-layout>
         <v-container fluid grid-list-xl>
@@ -52,6 +59,11 @@ export default {
         { color: "blue-grey darken-2", class: "white--text" },
         { color: "cyan lighten-2", class: "black--text" },
         { color: "deep-purple darken-2", class: "white--text" }
+      ],
+      sampleTags: [
+        { title: "Research" },
+        { title: "Machine Learning" },
+        { title: "JavaScript" }
       ],
       items: [
         {
@@ -167,7 +179,7 @@ export default {
                       My summer 2019 project involved collecting messaging usage data from a variety of sources
                       and building a dashboard of analysis metrics. The data collection and processing was done
                       using the Apache Kafka Java API. The analysis dashboard was built in Kibana after being
-                      inserted into an Elasticsearch database.
+                      inserted into an Elasticsearch data store.
                     </li>
                   </ul>
                   <strong>Summer 2018, Summer 2019</strong>
@@ -209,7 +221,9 @@ export default {
             { title: "TypeScript" },
             { title: "JavaScript" },
             { title: "Node.js" },
-            { title: "Chrome Extension" }
+            { title: "Chrome Extension" },
+            { title: "Neo4j" },
+            { title: "Graphs" }
           ],
           actions: [
             {
@@ -234,9 +248,10 @@ export default {
       const itemsToShow = [];
 
       this.items.forEach((item, itemIndex) => {
-        const descriptionContains = item.description
+        const descriptionContains = this.searchTerm
           .toUpperCase()
-          .includes(this.searchTerm.toUpperCase());
+          .split(" ")
+          .some(term => item.description.toUpperCase().includes(term));
         if (descriptionContains) {
           itemsToShow.push({
             colors:
