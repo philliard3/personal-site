@@ -13,11 +13,8 @@
               <span class="headline">No results found</span>
             </v-flex>
             <v-flex v-else xs12 v-for="(item, i) in filteredItems" :key="i">
-              <v-card
-                :color="item.colors ? item.colors.color : cardColors[i%cardColors.length].color"
-                :class="item.colors ? item.colors.class : cardColors[i%cardColors.length].class"
-              >
-                <v-card-title primary-title v-html="item.description"/>
+              <v-card :color="item.colors.color" :class="item.colors.class">
+                <v-card-title primary-title v-html="item.description" />
                 <v-card-text>
                   <v-chip
                     v-for="(tag, t) in item.tags"
@@ -33,7 +30,7 @@
                     :key="a"
                     flat
                     dark
-                    :class="item.colors ? item.colors.class : cardColors[i%cardColors.length].class"
+                    :class="item.colors.class"
                     :href="action.to"
                   >{{ action.text }}</v-btn>
                 </v-card-actions>
@@ -70,6 +67,7 @@ export default {
           tags: [
             { title: "JavaScript" },
             { title: "ES6" },
+            { title: "ES2015" },
             { title: "Vue" },
             { title: "Nuxt" },
             { title: "Material Design" },
@@ -119,6 +117,107 @@ export default {
               text: "See this project"
             }
           ]
+        },
+        {
+          description: `
+            <div>
+              <div class="headline">Natural Language Processing Research</div>
+              <span>
+                With funding from an Undergraduate Research Award from UMBC, I conducted experiments to inform
+                machine learning models for sentiment detection. With Dr. Frank Ferraro's advisory, I designed
+                the associated experiments, created a small web application to act as a survey for the experiment,
+                and trained natural language processing models based on that data. I presented my progress at UMBC's
+                Undergraduate Research and Creative Achievement Day during a poster session.
+                <div>
+                  <strong>2018-2019</strong>
+                </div>
+              </span>
+            </div>
+          `,
+          tags: [
+            { title: "Research" },
+            { title: "Machine Learning" },
+            { title: "Natural Language Processing" },
+            { title: "Python" },
+            { title: "JavaScript" },
+            { title: "UMBC" },
+            { title: "Undergrad" }
+          ]
+        },
+        {
+          colors: {
+            color: "#7399C6",
+            class: "white--text"
+          },
+          description: `
+            <div>
+              <div class="headline">Goldman Sachs Internships</div>
+              <span>
+                <div>
+                  During my summers in 2018 and 2019, I was at Goldman Sachs as a Summer Analyst.
+                  While there, I had the opportunity to work with various technologies having to do with
+                  messaging frameworks and interfacing with usage data from those messaging operations.
+                  <ul>
+                    <li>
+                      My summer 2018 project involved collecting graph-based data about messaging service usage.
+                      I built a full-stack service which injested this data into a JanusGrah instance and
+                      served it as JSON to a graph representation as a component in a larger React application.
+                    </li>
+                    <li>
+                      My summer 2019 project involved collecting messaging usage data from a variety of sources
+                      and building a dashboard of analysis metrics. The data collection and processing was done
+                      using the Apache Kafka Java API. The analysis dashboard was built in Kibana after being
+                      inserted into an Elasticsearch database.
+                    </li>
+                  </ul>
+                  <strong>Summer 2018, Summer 2019</strong>
+                </div>
+              </span>
+            </div>
+          `,
+          tags: [
+            { title: "React" },
+            { title: "JavaScript" },
+            { title: "Java" },
+            { title: "Graphs" },
+            { title: "JanusGraph" },
+            { title: "Gremlin" },
+            { title: "Tinkerpop" },
+            { title: "Kafka" },
+            { title: "Elasticsearch" }
+          ]
+        },
+        {
+          description: `
+            <div>
+              <div class="headline">Comic Tracking Extension</div>
+              <span>
+                <div>
+                  This is web scraping and RSS subscription application that builds and tracks a database of
+                  webcomics and their updates. The backend service is to be accompanied by a Google Chrome
+                  Extension that stores a local list of comics and checks in with the backend for updates.
+                  This project is part of an ongoing effort of mine to create a suite of tools that allow
+                  users to keep track of and support artists whose work they love.
+                </div>
+                <div>
+                  <strong>Ongoing</strong>
+                </div>
+              </span>
+            </div>
+          `,
+          tags: [
+            { title: "TypeScript" },
+            { title: "JavaScript" },
+            { title: "Node.js" },
+            { title: "Chrome Extension" }
+          ],
+          actions: [
+            {
+              /** Add the project link when it becomes public **/
+              to: "#",
+              text: "Coming Soon"
+            }
+          ]
         }
       ]
     };
@@ -126,17 +225,23 @@ export default {
   computed: {
     filteredItems() {
       if (!this.searchTerm) {
-        return this.items;
+        return this.items.map((item, itemIndex) => ({
+          colors:
+            item.colors || this.cardColors[itemIndex % this.cardColors.length],
+          ...item
+        }));
       }
-      const items = [];
+      const itemsToShow = [];
 
       this.items.forEach((item, itemIndex) => {
         const descriptionContains = item.description
           .toUpperCase()
           .includes(this.searchTerm.toUpperCase());
         if (descriptionContains) {
-          items.push({
-            colors: this.cardColors[itemIndex % this.cardColors.length],
+          itemsToShow.push({
+            colors:
+              item.colors ||
+              this.cardColors[itemIndex % this.cardColors.length],
             ...item
           });
           return;
@@ -145,15 +250,17 @@ export default {
           tag.title.toUpperCase().includes(this.searchTerm.toUpperCase())
         );
         if (tagsContain) {
-          items.push({
-            colors: this.cardColors[itemIndex % this.cardColors.length],
+          itemsToShow.push({
+            colors:
+              item.colors ||
+              this.cardColors[itemIndex % this.cardColors.length],
             ...item
           });
           return;
         }
       });
 
-      return items;
+      return itemsToShow;
     }
   }
 };

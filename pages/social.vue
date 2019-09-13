@@ -16,7 +16,7 @@
 
                     <v-list-tile v-else :key="link.title" avatar :href="link.to">
                       <v-list-tile-avatar>
-                        <img v-if="link.logo" :src="link.logo">
+                        <img v-if="link.logo" :src="link.logo" />
                         <v-icon v-else color="black">{{ link.icon }}</v-icon>
                       </v-list-tile-avatar>
                       <v-list-tile-content>
@@ -40,6 +40,18 @@ export default {
     return {
       links: [
         {
+          title: "Research Email",
+          to: "mailto:pdh@seas.upenn.edu",
+          icon: "contact_mail"
+        },
+        { divider: true, inset: true },
+        {
+          title: "Professional Email",
+          to: "mailto:pdhilliard3@gmail.com",
+          icon: "contact_mail"
+        },
+        { divider: true, inset: true },
+        {
           title: "GitHub",
           to: "https://github.com/philliard3",
           color: "black",
@@ -60,18 +72,6 @@ export default {
           to: "https://twitter.com/philliardcode",
           logo:
             "https://www.seas.upenn.edu/~pdh/Twitter_Social_Icon_Circle_Color.png"
-        },
-        { divider: true, inset: true },
-        {
-          title: "Research Email",
-          to: "mailto:pdh@seas.upenn.edu",
-          icon: "contact_mail"
-        },
-        { divider: true, inset: true },
-        {
-          title: "Professional Email",
-          to: "mailto:pdhilliard3@gmail.com",
-          icon: "contact_mail"
         }
       ]
     };
