@@ -8,7 +8,7 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate && cp -r ./dist/* philliard3.github.io/"
+    "generate": "nuxt generate --config-file ./nuxt.config.github-pages.js && cp -r ./dist/* philliard3.github.io/ && nuxt generate"
   },
   "dependencies": {
     "cross-env": "^5.2.1",
