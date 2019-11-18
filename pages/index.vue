@@ -36,8 +36,7 @@
 export default {
   data() {
     return {
-      profilePicture:
-        "https://media.licdn.com/dms/image/C4D03AQGqi0HYSVHVBQ/profile-displayphoto-shrink_200_200/0?e=1573689600&v=beta&t=B2JiSMeKVL46l8iLoy4BTQzGuwrHy_dowIbAEBtL__Q"
+      profilePicture:"https://avatars0.githubusercontent.com/u/15804078?s=460&v=4"
     };
   }
 };
